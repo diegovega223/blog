@@ -8,15 +8,16 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
+     *
+     * @return void
      */
-    public function up(): void
+    public function up()
     {
         Schema::create('posts', function (Blueprint $table) {
-            $table->id('id_post');
+            $table->id();
             $table->string('titulo');
             $table->text('cuerpo');
-            $table->dateTime('fecha_hora_publicacion');
-            $table->foreignId('id_autor')->constrained('autores', 'id_autor');
+            $table->foreignId('id_user')->constrained('users', 'id');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -24,8 +25,10 @@ return new class extends Migration
 
     /**
      * Reverse the migrations.
+     *
+     * @return void
      */
-    public function down(): void
+    public function down()
     {
         Schema::dropIfExists('posts');
     }

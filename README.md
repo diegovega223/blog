@@ -1,66 +1,34 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Trabajo Obligatorio
+## Programación I y Bases de Datos I
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+**Introducción**
+Este trabajo práctico obligatorio oficia como segundo parcial en las asignaturas Programación I y Bases de Datos I.
 
-## About Laravel
+**Objetivo**
+Implementar un sitio de blog simple, con contenido dinámico.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+**Requisitos de Programación**
+- Los posts deben contener título, cuerpo, autor y fecha y hora de publicación. Esta información tiene que mostrarse al momento de listar los posts.
+- Se deben mostrar un máximo de 3 posts a la vez. Al existir más, debe paginarse el sitio.
+- Los autores deben poder registrarse automáticamente con un formulario.
+- Luego de iniciar sesión, un autor debe tener una opción para editar el post en el mismo lugar donde se visualiza, así como una opción para eliminarlo.
+- Debe mostrarse los meses que tienen publicaciones, y al momento de cliqueralos, debe mostrar los posts de ese mes correspondiente.
+- El desarrollo debe versionarse con Git, subirse a Github, contemplar arquitectura en capas con el modelo MVC, y aplicar criterios de código limpio.
+- Las tablas deben implementarse usando migraciones de Laravel.
+- El sitio debe estar desarrollado con PHP 8, Laravel, y usar MySQL como base de datos.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+**Requisitos de Base de Datos**
+Realizar el MER y pasaje a tablas, acorde al siguiente requerimiento:
+Se desea solicitar la base de datos para un blog.
+El blog muestra posts, que contienen título, cuerpo, autor y fecha y hora de publicación. Los posts son realizados por autores, los cuales son usuarios que se registran. De los autores tienen simplemente un correo electrónico y un nombre de usuario.
+Se desea registrar en la base de datos, para cada post, y además, un historial de cambios para cada publicación, que registra cuando un autor modifica un post.
+Por otro lado, también se desea mostrar publicidad con cada post. La publicidad está compuesta por un nombre, una URL y una fecha de expiración. Cada autor decide si su post tendrá publicidad o no.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+**Entregas y calificaciones**
+- El trabajo debe ser realizado hasta 2 personas.
+- La fecha límite de entrega es el Lunes 10/07/2023 a las 19:30 hs.
+- Tanto el código fuente, como el MER y pasaje a tablas, se deben entregar mediante el siguiente formulario: [https://forms.gle/W5kDkR7BqUvkmdDNA](https://forms.gle/W5kDkR7BqUvkmdDNA).
+- El trabajo otorga una calificación de 60 puntos para ambas asignaturas.
 
-## Learning Laravel
-
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
-
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
-
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+T/RT Gonzalo Martinez
+Tecnicatura en Redes y Software Obligatorio Final

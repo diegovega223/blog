@@ -8,15 +8,17 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
+     *
+     * @return void
      */
-    public function up(): void
+    public function up()
     {
         Schema::create('publicidades', function (Blueprint $table) {
-            $table->id('id_publicidad');
+            $table->id();
             $table->string('nombre');
             $table->string('url');
             $table->dateTime('fecha_expiracion');
-            $table->foreignId('id_post')->constrained('posts', 'id_post');
+            $table->foreignId('id_post')->constrained('posts', 'id');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -24,8 +26,10 @@ return new class extends Migration
 
     /**
      * Reverse the migrations.
+     *
+     * @return void
      */
-    public function down(): void
+    public function down()
     {
         Schema::dropIfExists('publicidades');
     }
