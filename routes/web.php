@@ -28,6 +28,8 @@ Route::get('/post/{id}', [PostController::class, 'showPost'])->name('post.show-p
 Route::get('/login', [LoginController::class, 'showLogin'])->name('auth.login');
 Route::get('/user/posts', [PostController::class, 'userPosts'])->name('post.user-posts');
 Route::delete('/post/soft-delete/{id}', [PostController::class, 'softDeletePost'])->name('post.soft-delete-post');
+Route::get('/post/{id}/update', [PostController::class, 'showEditPost'])->name('post.modify-post');
+Route::post('/post/{id}/update', [PostController::class, 'updatePost'])->name('post.modify-post');
 
 
 
