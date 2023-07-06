@@ -8,19 +8,20 @@
       </a>
 
       <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-        <li><a href="/home" class="nav-link px-2 text-secondary">Inicio</a></li>
-        <li><a href="#" class="nav-link px-2 text-white">Articulos</a></li>
+
+        <li><a href="/home" class="nav-link px-2 text-secondary"><img src="{{ asset('/img/blogsote.png') }}" class="img-fluid navbar-logo"></a></li>
+        <li><a href="#" class="nav-link px-2 text-white">Mis Publicaciones</a></li>
+        <li><a href="/add-post" class="nav-link px-2 text-white">Nueva Publicación</a></li>
         <li>
           <span class="nav-link px-2 text-primary">
-          @auth
-          {{ auth()->user()->username }}
-          @endauth
-        </span>
+          </span>
         </li>
       </ul>
 
       @auth
-      {{auth()->user()->name}}
+      <span class="nav-link px-2 text-primary">
+        {{ auth()->user()->username }}
+      </span>
       <div class="text-end px-2">
         <a href="{{ route('logout') }}" class="btn btn-outline-light me-2">Cerrar sesión</a>
       </div>
