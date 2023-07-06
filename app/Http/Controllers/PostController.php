@@ -7,9 +7,10 @@ use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
-    public function show()
+    public function show($id)
     {
-        return view('post.add-post');
+        $post = Post::findOrFail($id);
+        return view('post.show', compact('post'));
     }
 
     public function addPost(Request $request)
@@ -26,5 +27,12 @@ class PostController extends Controller
         $post->save();
 
         return redirect()->route('add-post')->with('success', 'El post ha sido creado exitosamente.');
+    }
+
+    public function index()
+    {
+        $posts = Post::latest()->take(3)->get();
+
+        return view('home.index', compact('posts'));
     }
 }
