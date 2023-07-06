@@ -27,7 +27,7 @@
                                 <p class="card-text">Publicado por: {{ $post->user->name }}</p>
                                 <p class="card-text">Fecha de publicación: {{ $post->created_at }}</p>
                                 <div class="d-grid">
-                                    <a href="{{ route('posts.show', ['id' => $post->id]) }}" class="btn btn-primary">Ver Post</a>
+                                <a href="{{ route('post.show-post', ['id' => $post->id]) }}" class="btn btn-primary">Ver Post</a>
                                 </div>
                             </div>
                         </div>

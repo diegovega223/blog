@@ -11,7 +11,7 @@
                     <div class="card-header">Crear nuevo post</div>
 
                     <div class="card-body">
-                        <form method="POST" action="{{ route('add-post.success') }}">
+                        <form method="POST" action="{{ route('post.add-post') }}">
                             @csrf
 
                             <div class="form-group">

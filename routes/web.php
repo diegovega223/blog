@@ -9,7 +9,7 @@ use App\Http\Controllers\LogoutController;
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/logout', [LogoutController::class, 'perform'])->name('logout');
     Route::get('/add-post', [PostController::class, 'show'])->name('add-post');
-    Route::post('/add-post', [PostController::class, 'addPost'])->name('add-post.success');
+    Route::post('/add-post', [PostController::class, 'addPost'])->name('post.add-post');
 });
 
 Route::group(['middleware' => ['guest']], function () {
@@ -20,7 +20,9 @@ Route::group(['middleware' => ['guest']], function () {
 });
 
 Route::get('/home', [PostController::class, 'index'])->name('home.index');
-Route::get('/add-post', [PostController::class, 'show'])->name('add-post');
-Route::get('/posts/{id}', [PostController::class, 'show'])->name('posts.show');
+Route::get('/add-post', [PostController::class, 'showAddPost'])->name('post.add-post');
+Route::get('/post/{id}', [PostController::class, 'showPost'])->name('post.show-post');
+
+
 
 

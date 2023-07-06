@@ -7,11 +7,17 @@ use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
-    public function show($id)
+    public function showPost($id)
     {
-        $post = Post::findOrFail($id);
-        return view('post.show', compact('post'));
+        $post = Post::find($id);
+        return view('post.show-post', compact('post', 'id'));
     }
+
+    public function showAddPost()
+    {
+        return view('post.add-post');
+    }
+
 
     public function addPost(Request $request)
     {
@@ -26,7 +32,7 @@ class PostController extends Controller
         $post->id_user = auth()->user()->id;
         $post->save();
 
-        return redirect()->route('add-post')->with('success', 'El post ha sido creado exitosamente.');
+        return redirect()->route('post.add-post')->with('success', 'El post ha sido creado exitosamente.');
     }
 
     public function index()
