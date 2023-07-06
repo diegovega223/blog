@@ -43,10 +43,19 @@ class PostController extends Controller
     }
 
     public function userPosts()
-{
-    $userId = auth()->user()->id;
-    $posts = Post::where('id_user', $userId)->latest()->get();
+    {
+        $userId = auth()->user()->id;
+        $posts = Post::where('id_user', $userId)->latest()->get();
+    
+        return view('post.user-posts', compact('posts'))->with('softDeleteUrl', route('post.user-posts'));
+    }
+    
 
-    return view('post.user-posts', compact('posts'));
-}
+    public function softDeletePost($id)
+    {
+        $post = Post::find($id);
+        $post->delete();
+        return redirect()->back()->with('success', 'El post ha sido eliminado exitosamente.');
+    }
+    
 }

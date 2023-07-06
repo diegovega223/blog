@@ -11,6 +11,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/add-post', [PostController::class, 'show'])->name('add-post');
     Route::post('/add-post', [PostController::class, 'addPost'])->name('post.add-post');
     Route::get('/user/posts', [PostController::class, 'userPosts'])->name('post.user-posts');
+    Route::delete('/post/soft-delete/{id}', [PostController::class, 'softDeletePost'])->name('post.soft-delete-post');
+
 });
 
 Route::group(['middleware' => ['guest']], function () {
@@ -25,6 +27,8 @@ Route::get('/add-post', [PostController::class, 'showAddPost'])->name('post.add-
 Route::get('/post/{id}', [PostController::class, 'showPost'])->name('post.show-post');
 Route::get('/login', [LoginController::class, 'showLogin'])->name('auth.login');
 Route::get('/user/posts', [PostController::class, 'userPosts'])->name('post.user-posts');
+Route::delete('/post/soft-delete/{id}', [PostController::class, 'softDeletePost'])->name('post.soft-delete-post');
+
 
 
 
