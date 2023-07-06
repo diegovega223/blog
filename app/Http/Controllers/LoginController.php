@@ -8,10 +8,10 @@ use App\Http\Requests\LoginRequest;
 
 class LoginController extends Controller
 {
-    //
+
     public function show()
     {
-        if(Auth::check()){
+        if (Auth::check()) {
             return redirect()->route('home.index');
         }
         return view('auth.login');
@@ -20,21 +20,19 @@ class LoginController extends Controller
     public function login(LoginRequest $request)
     {
         $credentials = $request->getCredentials();
-        
-        if(!Auth::validate($credentials)):
-            dd('error');
-           return redirect()->to('login')
-                ->withErrors(trans('auth.failed'));
-        endif;
+
+        if (!Auth::validate($credentials)) {
+            return redirect()->route('login.show')->withErrors('Credenciales inválidas. Inténtalo de nuevo.');
+        }
+
         $user = Auth::getProvider()->retrieveByCredentials($credentials);
-        
 
         Auth::login($user);
 
         return $this->authenticated($request, $user);
     }
 
-    protected function authenticated(Request $request, $user) 
+    protected function authenticated(Request $request, $user)
     {
         return redirect()->route('home.index');
     }

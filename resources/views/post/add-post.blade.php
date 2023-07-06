@@ -37,7 +37,6 @@
                                 <button type="submit" class="btn btn-primary">Crear post</button>
                             </div>
                         </form>
-
                     </div>
 
                 </div>
@@ -45,12 +44,13 @@
         </div>
         <div class="row justify-content-center container">
             @if(session('success'))
-            
-            <div class="col-md-8 alert alert-success post-alert-success">
+            <div class="col-md-8 alert alert-success alert-dismissible fade show post-alert-success"  role="alert">
                 {{ session('success') }}
+                <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close">
+                </button>
             </div>
             @endif
-        </  div>
+            </ div>
+        </div>
     </div>
-</div>
-@endsection
+    @endsection

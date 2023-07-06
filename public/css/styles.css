@@ -4,10 +4,16 @@
   bottom: 0.25rem;
 }
 
-.from-btn{
+.form-btn{
 margin-bottom: 0.5rem;
 margin-top: 1rem;
 }
+.form-auth{
+margin: 2rem 1rem;
+
+}
+
+
 .post-alert-success {
 margin-top: 1rem;
 margin-bottom: 0;
