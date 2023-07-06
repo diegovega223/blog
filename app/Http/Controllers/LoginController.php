@@ -9,7 +9,7 @@ use App\Http\Requests\LoginRequest;
 class LoginController extends Controller
 {
 
-    public function show()
+    public function showLogin()
     {
         if (Auth::check()) {
             return redirect()->route('home.index');

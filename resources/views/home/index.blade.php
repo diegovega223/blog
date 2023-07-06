@@ -18,7 +18,7 @@
                 <hr><br>
                 <h2 class="mt-4">Últimos Posts</h2>
                 <div class="row">
-                    @foreach($posts as $post)
+                    @forelse($posts as $post)
                     <div class="col-md-4">
                         <div class="card mb-4">
                             <div class="card-body">
@@ -27,14 +27,19 @@
                                 <p class="card-text">Publicado por: {{ $post->user->name }}</p>
                                 <p class="card-text">Fecha de publicación: {{ $post->created_at }}</p>
                                 <div class="d-grid">
-                                <a href="{{ route('post.show-post', ['id' => $post->id]) }}" class="btn btn-primary">Ver Post</a>
+                                    <a href="{{ route('post.show-post', ['id' => $post->id]) }}" class="btn btn-primary">Ver Post</a>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    @endforeach
+                    @empty
+                    <div class="col-md-4">
+                        <p>Todavía no hay publicaciones.</p>
+                    </div>
+                    @endforelse
                 </div>
                 @endauth
+
 
                 @guest
                 <h1>Inicio</h1>

@@ -5,7 +5,7 @@
      
         <li><a href="/home" class="nav-link px-2 text-secondary"><img src="{{ asset('/img/blogsote.png') }}" class="img-fluid navbar-logo"></a></li>
         @auth
-        <li><a href="#" class="nav-link px-2 text-white">Mis Publicaciones</a></li>
+        <li><a href="/user/posts" class="nav-link px-2 text-white">Mis Publicaciones</a></li>
         <li><a href="/add-post" class="nav-link px-2 text-white">Nueva Publicación</a></li>
         @endauth
         <li>

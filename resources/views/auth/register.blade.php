@@ -61,7 +61,7 @@
 </form>
 
 <div class="text-center mt-3">
-    ¿Ya tienes una cuenta? <a href="{{ route('login') }}">Inicia sesión aquí</a>
+    ¿Ya tienes una cuenta? <a href="{{ route('auth.login') }}">Inicia sesión aquí</a>
 </div>
 
 @endsection

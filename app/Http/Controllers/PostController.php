@@ -41,4 +41,12 @@ class PostController extends Controller
 
         return view('home.index', compact('posts'));
     }
+
+    public function userPosts()
+{
+    $userId = auth()->user()->id;
+    $posts = Post::where('id_user', $userId)->latest()->get();
+
+    return view('post.user-posts', compact('posts'));
+}
 }
