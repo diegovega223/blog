@@ -4,7 +4,6 @@
 <div class="bg-light p-5 rounded">
     <h1>Nueva Publicación</h1>
     <br>
-    <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
@@ -52,5 +51,4 @@
             @endif
             </ div>
         </div>
-    </div>
     @endsection

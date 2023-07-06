@@ -12,7 +12,7 @@
     
     @include('layouts.partials.navbar')
 
-    <main class="container">
+    <main class="container bg-light  mt-2 mb-1 rounded">
         @yield('content')
     </main>
     @include('layouts.partials.footer')

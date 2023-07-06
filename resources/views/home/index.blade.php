@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row mt-4">
         <div class="col-md-8 offset-md-2">
-            <div class="bg-light p-5 rounded">
+            <div>
                 @if(Session::has('success'))
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
                     {{ Session::get('success') }}
@@ -33,7 +33,7 @@
                         </div>
                     </div>
                     @empty
-                    <div class="col-md-4">
+                    <div class="col-md-4 margin-bottom-100">
                         <p>Todavía no hay publicaciones.</p>
                     </div>
                     @endforelse
@@ -43,7 +43,7 @@
 
                 @guest
                 <h1>Inicio</h1>
-                <p class="lead">Estás viendo la página de inicio. Inicie sesión para ver los datos restringidos.</p>
+                <p class="lead margin-bottom-200">Estás viendo la página de inicio. Inicie sesión para ver los datos restringidos.</p>
                 @endguest
 
 
