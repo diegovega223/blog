@@ -47,10 +47,10 @@ class PostController extends Controller
     {
         $userId = auth()->user()->id;
         $posts = Post::where('id_user', $userId)->latest()->get();
-    
+
         return view('post.user-posts', compact('posts'))->with('softDeleteUrl', route('post.user-posts'));
     }
-    
+
 
     public function softDeletePost($id)
     {
@@ -58,7 +58,7 @@ class PostController extends Controller
         $post->delete();
         return redirect()->back()->with('success', 'El post ha sido eliminado exitosamente.');
     }
-    
+
     public function showEditPost($id)
     {
         $post = Post::find($id);
@@ -84,5 +84,10 @@ class PostController extends Controller
 
         return redirect()->route('post.user-posts', ['id' => $id])->with('success', 'El post ha sido modificado exitosamente.');
     }
-    
+    public function showCambioPost($id)
+    {
+        $post = Post::find($id);
+        $cambios = CambioPost::where('id_post', $id)->get();
+        return view('post.cambios-post', compact('post', 'cambios'));
+    }
 }

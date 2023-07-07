@@ -16,13 +16,12 @@
                 @auth
                 <h1 class="mt-4">Inicio</h1>
                 <hr><br>
-                <h2 class="mt-4">Últimos Posts</h2>
                 <div class="row">
                     @forelse($posts as $post)
                     <div class="col-md-4">
                         <div class="card mb-4">
                             <div class="card-body">
-                                <h4 class="card-title text-uppercase text-center text-primary ">{{ $post->titulo }}</h4>
+                                <h5 class="card-title text-uppercase text-center text-primary ">{{Str::limit($post->titulo, 30) }}</h5>
                                 <hr>
                                 <p class="card-text m-0">Autor: <i class="bi bi-person-fill text-primary"></i> {{ $post->user->name }}</p>
                                 <p class="card-text">Publicado : <i class="bi bi-calendar text-primary"></i> {{ $post->created_at }}</p>
