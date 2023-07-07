@@ -32,8 +32,10 @@
                             </span>
                             @enderror
                         </div>
-                            @csrf
-                            <button class="btn btn-primary" type="submit">Guardar cambios</button>
+                        @csrf
+                        <button class="btn btn-primary" type="submit">
+                            <i class="bi bi-pencil-fill"></i><span class="text-uppercase"> Guardar cambios</span> 
+                        </button>
                     </form>
                 </div>
 

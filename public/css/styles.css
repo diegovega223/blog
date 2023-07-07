@@ -1,42 +1,76 @@
-.margin-bottom-200{
+.margin-bottom-200 {
   margin-bottom: 20rem;
 }
-.margin-bottom-100{
+
+.margin-bottom-100 {
   margin-bottom: 10rem;
 }
+
 .navbar-logo {
   max-width: 150px;
   position: relative;
   bottom: 0.25rem;
 }
 
-.form-btn{
-margin-bottom: 0.5rem;
-margin-top: 1rem;
+.form-btn {
+  margin-bottom: 0.5rem;
+  margin-top: 1rem;
 }
-.form-auth{
-margin: 2rem 1rem;
+
+.form-auth {
+  margin: 2rem 1rem;
 
 }
 
 .post-alert-success {
-margin-top: 1rem;
-margin-bottom: 0;
+  margin-top: 1rem;
+  margin-bottom: 0;
 }
 
-.form-group input, textarea{
-margin-top: 0.5rem;
-margin-bottom: 2rem;
+.form-group input,
+textarea {
+  margin-top: 0.5rem;
+  margin-bottom: 2rem;
 }
 
 a.btn-post-list {
   margin-right: 1rem;
 }
 
-button.btn-post-list{
+button.btn-post-list {
   border-radius: 50%;
   padding: 0.5rem 1rem;
 }
 
+.link-primary-hover {
+  position: relative;
+}
+
+.link-primary-hover::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 100%;
+  height: 2px;
+  background-color: transparent;
+  transition: background-color 0.2s;
+}
+
+.link-primary-hover:hover {
+  color: #2b80ff !important;
+  text-decoration: none;
+}
+
+.link-primary-hover:hover::before {
+  background-color: #ffffff;
+}
 
 
+.navbar-logo {
+  transition: transform 0.3s ease-in-out;
+}
+
+.navbar-logo:hover {
+  transform: scale(1.1);
+}

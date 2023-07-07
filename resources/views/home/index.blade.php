@@ -22,12 +22,14 @@
                     <div class="col-md-4">
                         <div class="card mb-4">
                             <div class="card-body">
-                                <h5 class="card-title text-uppercase text-center">{{ $post->titulo }}</h5>
+                                <h4 class="card-title text-uppercase text-center text-primary ">{{ $post->titulo }}</h4>
                                 <hr>
-                                <p class="card-text">Publicado por: {{ $post->user->name }}</p>
-                                <p class="card-text">Fecha de publicación: {{ $post->created_at }}</p>
+                                <p class="card-text m-0">Autor: <i class="bi bi-person-fill text-primary"></i> {{ $post->user->name }}</p>
+                                <p class="card-text">Publicado : <i class="bi bi-calendar text-primary"></i> {{ $post->created_at }}</p>
                                 <div class="d-grid">
-                                    <a href="{{ route('post.show-post', ['id' => $post->id]) }}" class="btn btn-primary">Ver Post</a>
+                                    <a href="{{ route('post.show-post', ['id' => $post->id]) }}" class="btn btn-primary btn-post-list">
+                                        <i class="bi bi-eye"></i> Ver Publicación
+                                    </a>
                                 </div>
                             </div>
                         </div>
