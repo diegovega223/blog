@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use App\Models\CambioPost;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
+
 
 class PostController extends Controller
 {
@@ -38,9 +40,17 @@ class PostController extends Controller
 
     public function index()
     {
-        $posts = Post::latest()->take(3)->get();
+        $perPage = 3;
+        $posts = Post::paginate($perPage);
 
-        return view('home.index', compact('posts'));
+        $pagination = new LengthAwarePaginator(
+            $posts->items(),
+            $posts->total(),
+            $perPage,
+            $posts->currentPage(),
+            ['path' => route('home.index')]
+        );
+        return view('home.index', compact('posts', 'pagination'));
     }
 
     public function userPosts()

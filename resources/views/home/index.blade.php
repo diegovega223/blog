@@ -16,7 +16,7 @@
                 @auth
                 <h1 class="mt-4">Inicio</h1>
                 <hr><br>
-                <div class="row">
+                <div class="row margin-bottom-50">
                     @forelse($posts as $post)
                     <div class="col-md-4">
                         <div class="card mb-4">
@@ -38,18 +38,15 @@
                         <p>Todavía no hay publicaciones.</p>
                     </div>
                     @endforelse
+                    @include('layouts.partials.pagination')
+                    @endauth
+               
+                    @guest
+                    <h1>Inicio</h1>
+                    <p class="lead margin-bottom-200">Estás viendo la página de inicio. Inicie sesión para ver los datos restringidos.</p>
+                    @endguest
                 </div>
-                @endauth
-
-
-                @guest
-                <h1>Inicio</h1>
-                <p class="lead margin-bottom-200">Estás viendo la página de inicio. Inicie sesión para ver los datos restringidos.</p>
-                @endguest
-
-
             </div>
         </div>
     </div>
-</div>
-@endsection
+    @endsection
