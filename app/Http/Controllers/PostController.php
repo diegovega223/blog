@@ -37,20 +37,20 @@ class PostController extends Controller
     }
 
     public function index()
-    {
-        $perPage = 3;
-        $posts = Post::paginate($perPage);
+{
+    $perPage = 3;
+    $posts = Post::orderBy('created_at', 'desc')->paginate($perPage);
+    $pagination = new LengthAwarePaginator(
+        $posts->items(),
+        $posts->total(),
+        $perPage,
+        $posts->currentPage(),
+        ['path' => route('home.index')]
+    );
+    $months = $this->getMonth();
+    return view('home.index', compact('posts', 'pagination', 'months'));
+}
 
-        $pagination = new LengthAwarePaginator(
-            $posts->items(),
-            $posts->total(),
-            $perPage,
-            $posts->currentPage(),
-            ['path' => route('home.index')]
-        );
-        $months = $this->getMonth();
-        return view('home.index', compact('posts', 'pagination', 'months'));
-    }
 
     private function getMonth()
     {
@@ -86,30 +86,32 @@ class PostController extends Controller
     }
     
 
-public function postForMonth($month)
-{
-    $months = [
-        'Ene' => ['num' => '01'],
-        'Feb' => ['num' => '02'],
-        'Mar' => ['num' => '03'],
-        'Abr' => ['num' => '04'],
-        'May' => ['num' => '05'],
-        'Jun' => ['num' => '06'],
-        'Jul' => ['num' => '07'],
-        'Ago' => ['num' => '08'],
-        'Sep' => ['num' => '09'],
-        'Oct' => ['num' => '10'],
-        'Nov' => ['num' => '11'],
-        'Dic' => ['num' => '12'],
-    ];
-    if (isset($months[$month])) {
-        $monthNum = $months[$month]['num'];
-        $posts = Post::whereMonth('created_at', $monthNum)->get();
-        return view('post.post-for-month', compact('posts', 'months'));
-    } else {
-        return 'Mes inválido';
+ public function postForMonth($month)
+    {
+        $months = [
+            'Ene' => ['num' => '01'],
+            'Feb' => ['num' => '02'],
+            'Mar' => ['num' => '03'],
+            'Abr' => ['num' => '04'],
+            'May' => ['num' => '05'],
+            'Jun' => ['num' => '06'],
+            'Jul' => ['num' => '07'],
+            'Ago' => ['num' => '08'],
+            'Sep' => ['num' => '09'],
+            'Oct' => ['num' => '10'],
+            'Nov' => ['num' => '11'],
+            'Dic' => ['num' => '12'],
+        ];
+    
+        if (isset($months[$month])) {
+            $monthNum = $months[$month]['num'];
+            $posts = Post::whereMonth('created_at', $monthNum)->orderBy('created_at', 'desc')->paginate(3);
+            return view('post.post-for-month', compact('posts', 'months'));
+        } else {
+            return 'Mes inválido';
+        }
     }
-}
+    
     public function userPosts()
     {
         $userId = auth()->user()->id;

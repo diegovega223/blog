@@ -68,4 +68,5 @@
     <div class="text-center mt-3">
         ¿Ya tienes una cuenta? <a href="{{ route('auth.login') }}">Inicia sesión aquí</a>
     </div>
+    <div class="margin-bottom-100"></div>    
 @endsection

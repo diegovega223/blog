@@ -1,15 +1,15 @@
 @extends('layouts.base')
 
 @section('content')
- <div class="row align-items-center">
-            <div class="col-auto">
-                @include('layouts.partials.back-Button')
-            </div>
-            <div class="col">
-                <h1 class=" mt-3">Nueva Publicación</h1>
-                <hr>
-            </div>
+    <div class="row align-items-center">
+        <div class="col-auto">
+            @include('layouts.partials.back-Button')
         </div>
+        <div class="col">
+            <h1 class=" mt-3">Nueva Publicación</h1>
+            <hr>
+        </div>
+    </div>
     <div class="bg-light p-3 rounded">
         <div class="row justify-content-center">
             <div class="col-md-8">
@@ -63,4 +63,5 @@
             @endif
             </ div>
         </div>
+        <div class="margin-bottom-50"></div>
     @endsection

@@ -22,7 +22,7 @@ class LoginController extends Controller
         $credentials = $request->getCredentials();
 
         if (!Auth::validate($credentials)) {
-            return redirect()->route('login.show')->withErrors('Credenciales inválidas. Inténtalo de nuevo.');
+            return redirect()->route('auth.login')->withErrors('Credenciales inválidas. Inténtalo de nuevo.');
         }
 
         $user = Auth::getProvider()->retrieveByCredentials($credentials);

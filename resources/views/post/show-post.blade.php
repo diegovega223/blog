@@ -1,15 +1,15 @@
 @extends('layouts.base')
 
 @section('content')
-        <div class="row align-items-center">
-            <div class="col-auto">
-                @include('layouts.partials.back-Button')
-            </div>
-            <div class="col">
-                <h1 class="mt-3">{{ $post->titulo }}</h1>
-                <hr>
-            </div>
+    <div class="row align-items-center">
+        <div class="col-auto">
+            @include('layouts.partials.back-Button')
         </div>
+        <div class="col">
+            <h1 class="mt-3">{{ $post->titulo }}</h1>
+            <hr>
+        </div>
+    </div>
     <div class="row">
         <div class="col-md-8 offset-md-2">
             <div class="bg-light p-4 rounded">
@@ -19,4 +19,5 @@
             </div>
         </div>
     </div>
+    <div class="margin-bottom-50"></div>
 @endsection

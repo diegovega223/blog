@@ -12,6 +12,21 @@
   font-family: var(--fuente);
 }
 
+html {
+  min-height: 100%;
+  position: relative;
+}
+body {
+  margin: 0;
+  margin-bottom: 40px;
+}
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 4rem;
+}
+
 .margin-bottom-200 {
   margin-bottom: 20rem;
 }
