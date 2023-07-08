@@ -115,24 +115,28 @@ button.btn-post-list {
 
 .pagination-btn {
   background-color: #2267ce !important;
-  border-radius: 25%;
+  border-radius: 50%;
   padding: 0.5rem 1rem;
   margin: 0 0.5rem;
   text-decoration: none;
   color: white;
 }
 
+.pagination-btn.disabled {
+  color: #1c4f9b !important;
+}
+
 .custom-pagination-num {
-  background-color: #cacaca !important;
+  background-color: #1a1a19 !important;
   border-radius: 50%;
   padding: 0.4rem 0.8rem;
   margin: 0 0.25rem;
   text-decoration: none;
-  color: #2267ce;
+  color: white;
 }
 
 .custom-pagination-num.active {
-  background-color: #1a1a19 !important;
-  color: white;
+  background-color: #cacaca !important;
+  color: #2267ce;
   font-weight: bold;
 }

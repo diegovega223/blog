@@ -12,7 +12,7 @@ class CambioPost extends Model
 
     protected $table = 'cambios_posts';
 
-    protected $fillable = ['id_post', 'id_user'];
+    protected $fillable = ['id_post', 'id_user', 'titulo', 'cuerpo'];
 
     public function post()
     {
@@ -22,6 +22,11 @@ class CambioPost extends Model
     public function user()
     {
         return $this->belongsTo(User::class, 'id_user');
+    }
+
+    public function tieneCambios()
+    {
+        return $this->titulo || $this->cuerpo;
     }
 }
 

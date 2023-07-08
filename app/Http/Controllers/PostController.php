@@ -7,7 +7,6 @@ use App\Models\CambioPost;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 
-
 class PostController extends Controller
 {
     public function showPost($id)
@@ -20,7 +19,6 @@ class PostController extends Controller
     {
         return view('post.add-post');
     }
-
 
     public function addPost(Request $request)
     {
@@ -50,6 +48,7 @@ class PostController extends Controller
             $posts->currentPage(),
             ['path' => route('home.index')]
         );
+
         return view('home.index', compact('posts', 'pagination'));
     }
 
@@ -57,15 +56,14 @@ class PostController extends Controller
     {
         $userId = auth()->user()->id;
         $posts = Post::where('id_user', $userId)->latest()->get();
-
         return view('post.user-posts', compact('posts'))->with('softDeleteUrl', route('post.user-posts'));
     }
-
 
     public function softDeletePost($id)
     {
         $post = Post::find($id);
         $post->delete();
+
         return redirect()->back()->with('success', 'El post ha sido eliminado exitosamente.');
     }
 
@@ -83,21 +81,47 @@ class PostController extends Controller
         ]);
 
         $post = Post::find($id);
-        $post->titulo = $validatedData['titulo'];
-        $post->cuerpo = $validatedData['cuerpo'];
+        $cambios = [];
+
+        if ($post->titulo != $validatedData['titulo']) {
+            $cambios['titulo'] = true;
+            $post->titulo = $validatedData['titulo'];
+        }
+
+        if ($post->cuerpo != $validatedData['cuerpo']) {
+            $cambios['cuerpo'] = true;
+            $post->cuerpo = $validatedData['cuerpo'];
+        }
+
         $post->save();
 
-        $cambioPost = new CambioPost();
-        $cambioPost->id_post = $post->id;
-        $cambioPost->id_user = auth()->user()->id;
-        $cambioPost->save();
-
+        if (!empty($cambios)) {
+            $cambioPost = new CambioPost();
+            $cambioPost->id_post = $post->id;
+            $cambioPost->id_user = auth()->user()->id;
+            $cambioPost->titulo = isset($cambios['titulo']);
+            $cambioPost->cuerpo = isset($cambios['cuerpo']);
+            $cambioPost->save();
+        }
         return redirect()->route('post.user-posts', ['id' => $id])->with('success', 'El post ha sido modificado exitosamente.');
     }
+
     public function showCambioPost($id)
     {
         $post = Post::find($id);
         $cambios = CambioPost::where('id_post', $id)->get();
-        return view('post.cambios-post', compact('post', 'cambios'));
+
+        $cambiosData = [];
+
+        foreach ($cambios as $cambio) {
+            $cambioData = [
+                'fecha' => $cambio->created_at,
+                'titulo' => $cambio->titulo,
+                'cuerpo' => $cambio->cuerpo,
+            ];
+
+            $cambiosData[] = $cambioData;
+        }
+        return view('post.cambios-post', compact('post', 'cambiosData'));
     }
 }
