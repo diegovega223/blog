@@ -55,9 +55,11 @@ class PostController extends Controller
     public function userPosts()
     {
         $userId = auth()->user()->id;
-        $posts = Post::where('id_user', $userId)->latest()->get();
+        $perPage = 4;
+        $posts = Post::where('id_user', $userId)->latest()->paginate($perPage);
         return view('post.user-posts', compact('posts'))->with('softDeleteUrl', route('post.user-posts'));
     }
+    
 
     public function softDeletePost($id)
     {

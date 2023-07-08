@@ -140,3 +140,10 @@ button.btn-post-list {
   color: #2267ce;
   font-weight: bold;
 }
+
+.pagination-info {
+  position: relative;
+  bottom: 0.5rem;
+  color: white;
+
+}
