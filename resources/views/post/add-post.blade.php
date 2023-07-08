@@ -1,9 +1,16 @@
 @extends('layouts.base')
 
 @section('content')
-    <div class="bg-light p-5 rounded">
-        <h1>Nueva Publicación</h1>
-        <br>
+ <div class="row align-items-center">
+            <div class="col-auto">
+                @include('layouts.partials.back-Button')
+            </div>
+            <div class="col">
+                <h1 class=" mt-3">Nueva Publicación</h1>
+                <hr>
+            </div>
+        </div>
+    <div class="bg-light p-3 rounded">
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">

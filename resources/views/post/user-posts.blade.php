@@ -1,7 +1,15 @@
 @extends('layouts.base')
 
 @section('content')
-    <h1 class="mb-5 mt-5">Mis Publicaciones</h1>
+
+    <div class="row align-items-center mb-3">
+        <div class="col-auto">
+            @include('layouts.partials.back-Button')
+        </div>
+        <div class="col">
+            <h1 class="mt-3">Mis Publicaciones</h1>
+        </div>
+    </div>
     @if ($posts->count() > 0)
         <ul class="list-group">
             @foreach ($posts as $post)
@@ -13,7 +21,8 @@
                         <a href="{{ route('post.show-post', ['id' => $post->id]) }}" class="btn btn-primary btn-post-list">
                             <i class="bi bi-eye"></i>
                         </a>
-                        <a href="{{ route('post.modify-post', ['id' => $post->id]) }}" class="btn btn-primary btn-post-list">
+                        <a href="{{ route('post.modify-post', ['id' => $post->id]) }}"
+                            class="btn btn-primary btn-post-list">
                             <i class="bi bi-pencil-square text-white"></i>
                         </a>
                         <a href="{{ route('post.cambios-post', $post->id) }}" class="btn btn-primary btn-post-list">

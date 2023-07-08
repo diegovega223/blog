@@ -31,3 +31,4 @@ Route::delete('/post/soft-delete/{id}', [PostController::class, 'softDeletePost'
 Route::get('/post/{id}/update', [PostController::class, 'showEditPost'])->name('post.modify-post');
 Route::post('/post/{id}/update', [PostController::class, 'updatePost'])->name('post.modify-post');
 Route::get('/post/{id}/cambios', [PostController::class, 'showCambioPost'])->name('post.cambios-post');
+Route::get('/post-for-month/{month}', [PostController::class, 'postForMonth'])->name('post.post-for-month');

@@ -1,5 +1,4 @@
 @extends('layouts.base')
-
 @section('content')
     <div class="container">
         <div class="row mt-4">
@@ -14,8 +13,20 @@
                     @endif
 
                     @auth
-                        <h1 class="mt-4">Inicio</h1>
-                        <hr><br>
+                        <div class="row mt-4 card bg-dark mb-3">
+                            <div class="col-md-8 offset-md-2">
+                                <div class="month-links">
+                                    @foreach ($months as $m)
+                                        @if ($m['publications'])
+                                        <a href="{{ route('post.post-for-month', ['month' => $m['name']]) }}" class="month-link">{{ $m['name'] }}</a>
+                                        @else
+                                        <span class="month-disabled">{{ $m['name'] }}</span>
+                                        @endif
+                                    @endforeach
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="row margin-bottom-50">
                             @forelse($posts as $post)
                                 <div class="col-md-4">
@@ -37,23 +48,25 @@
                                         </div>
                                     </div>
                                 </div>
+
                             @empty
                                 <div class="col-md-4 margin-bottom-100">
                                     <p>Todavía no hay publicaciones.</p>
                                 </div>
                             @endforelse
-                            @if ($post->count() > 3)
-                                @include('layouts.partials.pagination')
-                            @endif
-                        @endauth
+                        </div>
+                        @if ($posts->count() >= 3)
+                               @include('layouts.partials.pagination', ['pagination' => $posts])
+                        @endif
+                    @endauth
 
-                        @guest
-                            <h1>Inicio</h1>
-                            <p class="lead margin-bottom-200">Estás viendo la página de inicio. Inicie sesión para ver los datos
-                                restringidos.</p>
-                        @endguest
-                    </div>
+                    @guest
+                        <h1>Inicio</h1>
+                        <p class="lead margin-bottom-200">Estás viendo la página de inicio. Inicie sesión para ver los datos
+                            restringidos.</p>
+                    @endguest
                 </div>
             </div>
         </div>
-    @endsection
+    </div>
+@endsection
