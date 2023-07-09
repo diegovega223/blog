@@ -14,7 +14,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">Crear Publicación</div>
+                    <div class="card-header bg-dark text-light">Crear Publicación</div>
 
                     <div class="card-body">
                         <form method="POST" action="{{ route('post.add-post') }}">
@@ -34,7 +34,7 @@
 
                             <div class="form-group">
                                 <label for="cuerpo">Cuerpo</label>
-                                <textarea id="cuerpo" class="form-control @error('cuerpo') is-invalid @enderror" name="cuerpo" required>{{ old('cuerpo') }}</textarea>
+                              <textarea id="cuerpo" class="form-control @error('cuerpo') is-invalid @enderror" name="cuerpo" rows="8" required>{{ old('cuerpo') }}</textarea>
                                 @error('cuerpo')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

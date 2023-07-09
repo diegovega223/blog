@@ -14,7 +14,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">Modificar post</div>
+                    <div class="card-header bg-dark text-light">Modificar post</div>
 
                     <div class="card-body">
                         <form method="POST" action="{{ route('post.modify-post', ['id' => $post->id]) }}">
@@ -34,7 +34,7 @@
 
                             <div class="form-group">
                                 <label for="cuerpo">Cuerpo</label>
-                                <textarea id="cuerpo" class="form-control @error('cuerpo') is-invalid @enderror" name="cuerpo" required>{{ $post->cuerpo }}</textarea>
+                              <textarea id="cuerpo" class="form-control @error('cuerpo') is-invalid @enderror" rows="8" name="cuerpo" required>{{ $post->cuerpo }}</textarea>
                                 @error('cuerpo')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
