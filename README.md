@@ -1,5 +1,29 @@
-# Trabajo Obligatorio
-## Programación I y Bases de Datos I
+# Como levantar este proyecto
+
+**Paso1: Clonar el repositorio**
+- Clonar el repositorio con el comando git clone.
+**Paso2: Instalar composer**
+- Dentro del proyecto en la consola escribi composer install.
+**Paso3: Crear un base de datos**
+- Crear una base de datos y ponerle por ej: blog
+**Paso4: Crear el .env**
+- Dentro del proyecto en la raíz, ejecutar este comando cp .env.example .env.
+- Configurar el archivo .env, poner el nombre de la bd que creaste.
+**Paso5: Generar clave de aplicación**
+- Simplemetne ejecuta en la consola php artisan key:generate
+**Paso6: Ejecutar las migraciones**
+- Para crear las tablas ejecuta el siguiente comando : php artisan migrate
+**Paso7 (Opcional): Rellanar datos de forma automatica**
+- Para esto hay que ejecutar el siguiente comando: php artisan db:seed
+- Esto generara usuarios que ya realizaron posts, y ya realizaron cambios en sus posts, por lo que los post tiene historial de cambio.
+- Para ver los usuarios que se generaron usar un gestor de bd y ejecutar: select name from users;
+- La contraseña sera para todos los usarios: Password123
+**Ultimo paso: Inicia el servidor**
+- Inica el el servidor ejecutando: php artisan serve
+- En la bara del navegador escribe: http://127.0.0.1:8000/home/
+- Y listo.
+
+# Letra de Trabajo Obligatorio
 
 **Introducción**
 Este trabajo práctico obligatorio oficia como segundo parcial en las asignaturas Programación I y Bases de Datos I.
