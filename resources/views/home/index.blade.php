@@ -11,7 +11,6 @@
                             </button>
                         </div>
                     @endif
-
                     @auth
                         <div class="row mt-4 card bg-dark mb-3">
                             <div class="col-md-8 offset-md-2">

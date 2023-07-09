@@ -25,7 +25,7 @@
                             class="btn btn-primary btn-post-list">
                             <i class="bi bi-pencil-square text-white"></i>
                         </a>
-                        <a href="{{ route('post.cambios-post', $post->id) }}" class="btn btn-primary btn-post-list">
+                        <a href="{{ route('post.changes-post', $post->id) }}" class="btn btn-primary btn-post-list">
                             <i class="bi bi-clock"></i>
                         </a>
                         <form action="{{ route('post.soft-delete-post', $post->id) }}" method="POST">

@@ -1,10 +1,10 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Models\Post;
-use App\Models\CambioPost;
+use App\Models\ChangePost;
 use Illuminate\Http\Request;
-use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\DB;
 
 class PostController extends Controller
@@ -27,30 +27,23 @@ class PostController extends Controller
             'cuerpo' => 'required',
         ]);
 
-        $post = new Post();
-        $post->titulo = $validatedData['titulo'];
-        $post->cuerpo = $validatedData['cuerpo'];
-        $post->id_user = auth()->user()->id;
-        $post->save();
+        $post = Post::create([
+            'titulo' => $validatedData['titulo'],
+            'cuerpo' => $validatedData['cuerpo'],
+            'id_user' => auth()->user()->id,
+        ]);
 
         return redirect()->route('post.add-post')->with('success', 'El post ha sido creado exitosamente.');
     }
 
     public function index()
-{
-    $perPage = 3;
-    $posts = Post::orderBy('created_at', 'desc')->paginate($perPage);
-    $pagination = new LengthAwarePaginator(
-        $posts->items(),
-        $posts->total(),
-        $perPage,
-        $posts->currentPage(),
-        ['path' => route('home.index')]
-    );
-    $months = $this->getMonth();
-    return view('home.index', compact('posts', 'pagination', 'months'));
-}
-
+    {
+        $perPage = 3;
+        $posts = Post::latest()->paginate($perPage);
+        $pagination = $posts->appends(['path' => route('home.index')]);
+        $months = $this->getMonth();
+        return view('home.index', compact('posts', 'pagination', 'months'));
+    }
 
     private function getMonth()
     {
@@ -73,7 +66,7 @@ class PostController extends Controller
             LEFT JOIN posts p ON MONTH(p.created_at) = m.month AND p.deleted_at IS NULL
             GROUP BY m.month, m.spanish_name
         ");
-        
+    
         $monthsWithPublications = [];
         foreach ($results as $result) {
             $monthsWithPublications[$result->month] = [
@@ -81,14 +74,54 @@ class PostController extends Controller
                 'publications' => ($result->amount > 0),
             ];
         }
-    
         return $monthsWithPublications;
     }
     
 
- public function postForMonth($month)
+
+    public function postForMonth($month)
+    {
+        $monthNum = $this->getMonthNumber($month);
+
+        if ($monthNum !== null) {
+            $posts = $this->getPostsForMonth($monthNum);
+            $months = $this->getMonths();
+            return view('post.post-for-month', compact('posts', 'months'));
+        } else {
+            return 'Mes inválido';
+        }
+    }
+
+    private function getMonthNumber($month)
     {
         $months = [
+            'Ene' => '01',
+            'Feb' => '02',
+            'Mar' => '03',
+            'Abr' => '04',
+            'May' => '05',
+            'Jun' => '06',
+            'Jul' => '07',
+            'Ago' => '08',
+            'Sep' => '09',
+            'Oct' => '10',
+            'Nov' => '11',
+            'Dic' => '12',
+        ];
+
+        return $months[$month] ?? null;
+    }
+
+    private function getPostsForMonth($monthNum)
+    {
+        return Post::whereMonth('created_at', $monthNum)
+            ->orderBy('created_at', 'desc')
+            ->paginate(3);
+    }
+
+    private function getMonths()
+    {
+        return [
             'Ene' => ['num' => '01'],
             'Feb' => ['num' => '02'],
             'Mar' => ['num' => '03'],
@@ -102,16 +135,9 @@ class PostController extends Controller
             'Nov' => ['num' => '11'],
             'Dic' => ['num' => '12'],
         ];
-    
-        if (isset($months[$month])) {
-            $monthNum = $months[$month]['num'];
-            $posts = Post::whereMonth('created_at', $monthNum)->orderBy('created_at', 'desc')->paginate(3);
-            return view('post.post-for-month', compact('posts', 'months'));
-        } else {
-            return 'Mes inválido';
-        }
     }
-    
+
+
     public function userPosts()
     {
         $userId = auth()->user()->id;
@@ -119,7 +145,6 @@ class PostController extends Controller
         $posts = Post::where('id_user', $userId)->latest()->paginate($perPage);
         return view('post.user-posts', compact('posts'))->with('softDeleteUrl', route('post.user-posts'));
     }
-    
 
     public function softDeletePost($id)
     {
@@ -137,54 +162,72 @@ class PostController extends Controller
 
     public function updatePost(Request $request, $id)
     {
-        $validatedData = $request->validate([
+        $validatedData = $this->validatePostData($request);
+
+        $post = $this->findPost($id);
+        $changes = $this->comparePostChanges($post, $validatedData);
+        $this->updatePostFields($post, $validatedData);
+        $this->savePost($post);
+        $this->createChangePost($post, $changes);
+
+        return $this->redirectToUserPosts($id);
+    }
+
+    private function validatePostData(Request $request)
+    {
+        return $request->validate([
             'titulo' => 'required|max:255',
             'cuerpo' => 'required',
         ]);
+    }
 
-        $post = Post::find($id);
-        $cambios = [];
+    private function findPost($id)
+    {
+        return Post::find($id);
+    }
+
+    private function comparePostChanges($post, $validatedData)
+    {
+        $changes = [];
 
         if ($post->titulo != $validatedData['titulo']) {
-            $cambios['titulo'] = true;
+            $changes['titulo'] = true;
             $post->titulo = $validatedData['titulo'];
         }
 
         if ($post->cuerpo != $validatedData['cuerpo']) {
-            $cambios['cuerpo'] = true;
+            $changes['cuerpo'] = true;
             $post->cuerpo = $validatedData['cuerpo'];
         }
 
-        $post->save();
+        return $changes;
+    }
 
-        if (!empty($cambios)) {
-            $cambioPost = new CambioPost();
-            $cambioPost->id_post = $post->id;
-            $cambioPost->id_user = auth()->user()->id;
-            $cambioPost->titulo = isset($cambios['titulo']);
-            $cambioPost->cuerpo = isset($cambios['cuerpo']);
-            $cambioPost->save();
+    private function updatePostFields($post, $validatedData)
+    {
+        $post->titulo = $validatedData['titulo'];
+        $post->cuerpo = $validatedData['cuerpo'];
+    }
+
+    private function savePost($post)
+    {
+        $post->save();
+    }
+
+    private function createChangePost($post, $changes)
+    {
+        if (!empty($changes)) {
+            $changePost = new ChangePost();
+            $changePost->id_post = $post->id;
+            $changePost->id_user = auth()->user()->id;
+            $changePost->titulo = isset($changes['titulo']);
+            $changePost->cuerpo = isset($changes['cuerpo']);
+            $changePost->save();
         }
+    }
+
+    private function redirectToUserPosts($id)
+    {
         return redirect()->route('post.user-posts', ['id' => $id])->with('success', 'El post ha sido modificado exitosamente.');
     }
-
-    public function showCambioPost($id)
-    {
-        $post = Post::find($id);
-        $cambios = CambioPost::where('id_post', $id)->get();
-
-        $cambiosData = [];
-
-        foreach ($cambios as $cambio) {
-            $cambioData = [
-                'fecha' => $cambio->created_at,
-                'titulo' => $cambio->titulo,
-                'cuerpo' => $cambio->cuerpo,
-            ];
-
-            $cambiosData[] = $cambioData;
-        }
-        return view('post.cambios-post', compact('post', 'cambiosData'));
-    }
-
 }

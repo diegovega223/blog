@@ -6,11 +6,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class CambioPost extends Model
+class ChangePost extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $table = 'cambios_posts';
+    protected $table = 'Changes_posts';
 
     protected $fillable = ['id_post', 'id_user', 'titulo', 'cuerpo'];
 

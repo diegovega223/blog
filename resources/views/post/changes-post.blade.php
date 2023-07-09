@@ -6,7 +6,7 @@
             @include('layouts.partials.back-Button')
         </div>
         <div class="col">
-            <h1 class="mt-3">Historial de Cambios de la Publicación #{{ $post->id }}</h1>
+            <h1 class="mt-3">Historial de changes de la Publicación #{{ $post->id }}</h1>
             <hr>
         </div>
     </div>
@@ -14,20 +14,20 @@
         <p><strong><i class="bi bi-calendar-fill"></i> Hora de Publicación:</strong> {{ $post->created_at }}</p>
     </div>
 
-    @if ($cambiosData)
+    @if ($changesData)
         <ul class="list-group">
-            @foreach ($cambiosData as $cambio)
+            @foreach ($changesData as $change)
                 <li class="list-group-item">
                     <p>
                         <strong>
-                            <i class="bi bi-clock-history"></i> Se realizó un cambio:
+                            <i class="bi bi-clock-history"></i> Se realizó un change:
                         </strong>
-                        <span class="text-primary">{{ $cambio['fecha'] }}</span>
+                        <span class="text-primary">{{ $change['fecha'] }}</span>
                     </p>
-                    @if ($cambio['titulo'])
+                    @if ($change['titulo'])
                         <p><i class="bi bi-check-circle-fill text-primary"></i> Se modificó el título.</p>
                     @endif
-                    @if ($cambio['cuerpo'])
+                    @if ($change['cuerpo'])
                         <p><i class="bi bi-check-circle-fill text-primary"></i> Se modificó el cuerpo.</p>
                     @endif
                 </li>
@@ -39,4 +39,5 @@
         </div>
     @endif
     </div>
+    <div class="margin-bottom-100"></div>
 @endsection

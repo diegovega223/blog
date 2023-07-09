@@ -5,6 +5,7 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
+use App\Http\Controllers\ChangePostController;
 
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/logout', [LogoutController::class, 'perform'])->name('logout');
@@ -30,5 +31,5 @@ Route::get('/user/posts', [PostController::class, 'userPosts'])->name('post.user
 Route::delete('/post/soft-delete/{id}', [PostController::class, 'softDeletePost'])->name('post.soft-delete-post');
 Route::get('/post/{id}/update', [PostController::class, 'showEditPost'])->name('post.modify-post');
 Route::post('/post/{id}/update', [PostController::class, 'updatePost'])->name('post.modify-post');
-Route::get('/post/{id}/cambios', [PostController::class, 'showCambioPost'])->name('post.cambios-post');
+Route::get('/post/{id}/changes', [ChangePostController::class, 'showChangePost'])->name('post.changes-post');
 Route::get('/post-for-month/{month}', [PostController::class, 'postForMonth'])->name('post.post-for-month');
