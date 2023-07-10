@@ -41,7 +41,7 @@ class RegisterController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'username' => $request->username,
-            'password' => bcrypt($request->password),
+            'password' => $request->password,
         ]);
 
         Auth::login($user);

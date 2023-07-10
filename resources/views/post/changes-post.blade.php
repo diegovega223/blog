@@ -6,7 +6,7 @@
             @include('layouts.partials.back-Button')
         </div>
         <div class="col">
-            <h1 class="mt-3">Historial de changes de la Publicación #{{ $post->id }}</h1>
+            <h1 class="mt-3">Historial de cambios de la Publicación #{{ $post->id }}</h1>
             <hr>
         </div>
     </div>
@@ -20,7 +20,7 @@
                 <li class="list-group-item">
                     <p>
                         <strong>
-                            <i class="bi bi-clock-history"></i> Se realizó un change:
+                            <i class="bi bi-clock-history"></i> Se realizó un cambio:
                         </strong>
                         <span class="text-primary">{{ $change['fecha'] }}</span>
                     </p>
