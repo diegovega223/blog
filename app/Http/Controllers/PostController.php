@@ -38,7 +38,7 @@ class PostController extends Controller
 
     public function index()
     {
-        $perPage = 3;
+        $perPage = 12;
         $posts = Post::latest()->paginate($perPage);
         $pagination = $posts->appends(['path' => route('home.index')]);
         $months = $this->getMonth();
@@ -47,37 +47,29 @@ class PostController extends Controller
 
     private function getMonth()
     {
-        $results = DB::select("
-            SELECT m.month, m.spanish_name, COUNT(p.id) AS amount
-            FROM (
-                SELECT 1 AS month, 'Ene' AS spanish_name UNION
-                SELECT 2 AS month, 'Feb' AS spanish_name UNION
-                SELECT 3 AS month, 'Mar' AS spanish_name UNION
-                SELECT 4 AS month, 'Abr' AS spanish_name UNION
-                SELECT 5 AS month, 'May' AS spanish_name UNION
-                SELECT 6 AS month, 'Jun' AS spanish_name UNION
-                SELECT 7 AS month, 'Jul' AS spanish_name UNION
-                SELECT 8 AS month, 'Ago' AS spanish_name UNION
-                SELECT 9 AS month, 'Sep' AS spanish_name UNION
-                SELECT 10 AS month, 'Oct' AS spanish_name UNION
-                SELECT 11 AS month, 'Nov' AS spanish_name UNION
-                SELECT 12 AS month, 'Dic' AS spanish_name
-            ) m
-            LEFT JOIN posts p ON MONTH(p.created_at) = m.month AND p.deleted_at IS NULL
-            GROUP BY m.month, m.spanish_name
-        ");
-    
+        $months = [
+            1 => 'Ene', 2 => 'Feb', 3 => 'Mar', 4 => 'Abr',
+            5 => 'May', 6 => 'Jun', 7 => 'Jul', 8 => 'Ago',
+            9 => 'Sep', 10 => 'Oct', 11 => 'Nov', 12 => 'Dic'
+        ];
+
         $monthsWithPublications = [];
-        foreach ($results as $result) {
-            $monthsWithPublications[$result->month] = [
-                'name' => $result->spanish_name,
-                'publications' => ($result->amount > 0),
+
+        foreach ($months as $month => $spanishName) {
+            $publications = DB::table('posts')
+                ->select(DB::raw('COUNT(id) as amount'))
+                ->whereRaw('MONTH(created_at) = ?', [$month])
+                ->whereNull('deleted_at')
+                ->value('amount');
+
+            $monthsWithPublications[$month] = [
+                'name' => $spanishName,
+                'publications' => $publications > 0,
             ];
         }
+
         return $monthsWithPublications;
     }
-    
-
 
     public function postForMonth($month)
     {
